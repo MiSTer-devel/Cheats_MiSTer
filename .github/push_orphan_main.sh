@@ -3,8 +3,19 @@
 
 set -euo pipefail
 
+git checkout -f develop -b main
+echo "Running detox"
+detox -v -s utf_8-only -r *
+echo "Detox done"
+echo "Removing colons"
+IFS=$'\n'
+for i in $(find . -name "*:*"); do
+    echo mv "${i}" "${i/:/-}"
+    mv "${i}" "${i/:/-}"
+done
+echo "Colons removed"
+
 git fetch origin main
-git checkout --orphan main
 git add .
 git commit -m "-"
 
