@@ -1,0 +1,41 @@
+name: Fetch Cheats
+
+on:
+  schedule:
+  - cron:  "0 * * * *"
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: develop
+
+    - name: Install apt-get utilities
+      run: sudo apt-get install detox sharutils
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+        cache: 'pip'
+        cache-dependency-path: .github/requirements.txt
+
+    - run: pip install -r .github/requirements.txt
+
+    - name: Download Cheats
+      run: ./.github/download_cheats.py .
+
+    - name: Push Orphan Main
+      run: |
+        set -euo pipefail
+        git config --global user.email "theypsilon@gmail.com"
+        git config --global user.name "The CI/CD Bot"
+        ./.github/push_orphan_main.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
