@@ -28,7 +28,7 @@ def main():
             if i == 4:
                 raise e
             traceback.print_exc()
-            print(f'Attempting again... [{i}]')
+            print(f'Attempting again... [{i}]', flush=True)
             time.sleep(15)
 
     print()
@@ -65,7 +65,7 @@ def install_cheats(target_dir):
         tmp_zip = f'/tmp/{cheat_key}{cheat_platform}.zip'
         cheat_folder = f'{target_dir}/Cheats/{cheat_platform}'
 
-        print(f'cheat_keys: {cheat_key}, cheat_platform: {cheat_platform}, cheat_zip: {cheat_zip}, cheat_url: {cheat_url}')
+        print(f'cheat_keys: {cheat_key}, cheat_platform: {cheat_platform}, cheat_zip: {cheat_zip}, cheat_url: {cheat_url}', flush=True)
 
         download_file(cheat_url, tmp_zip)
         unzip(tmp_zip, cheat_folder)
@@ -77,7 +77,7 @@ def collect_cheat_zips(url):
 def fetch_text(url, cookies=None):
     r = requests.get(url, allow_redirects=True, cookies=cookies)
     if r.status_code != 200:
-        raise Exception(f'Request to {url} failed')
+        raise Exception(f'Request to {url} failed: {r.status_code}')
     
     return r.text
 
