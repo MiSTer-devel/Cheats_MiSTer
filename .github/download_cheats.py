@@ -20,16 +20,16 @@ def main():
         shutil.rmtree(target_dir, ignore_errors=True)
         Path(target_dir).mkdir(parents=True, exist_ok=True)
 
-    for i in range(5):
+    for i in range(8):
         try:
             install_cheats(target_dir)
             break
         except Exception as e:
-            if i == 4:
+            if i == 7:
                 raise e
             traceback.print_exc()
-            print(f'Attempting again... [{i}]', flush=True)
-            time.sleep(15)
+            print(f'Attempting again in 15 minutes... [{i}]', flush=True)
+            time.sleep(60 * 15)
 
     print()
     print("Time:")
