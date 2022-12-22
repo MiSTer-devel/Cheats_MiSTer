@@ -6,6 +6,7 @@ import requests
 import zipfile
 import sys
 import shutil
+import traceback
 from pathlib import Path
 
 def main():
@@ -19,7 +20,16 @@ def main():
         shutil.rmtree(target_dir, ignore_errors=True)
         Path(target_dir).mkdir(parents=True, exist_ok=True)
 
-    install_cheats(target_dir)
+    for i in range(5):
+        try:
+            install_cheats(target_dir)
+            break
+        except Exception as e:
+            if i == 4:
+                raise e
+            traceback.print_exc()
+            print(f'Attempting again... [{i}]')
+            time.sleep(15)
 
     print()
     print("Time:")
@@ -46,9 +56,9 @@ cheats_mapping = {
 
 def install_cheats(target_dir):
     page_url = "https://gamehacking.org/mister"
+    cheat_zips = collect_cheat_zips(page_url)
 
     for cheat_key, cheat_platform in cheats_mapping.items():
-        cheat_zips = collect_cheat_zips(page_url)
 
         cheat_zip = next(cheat_zip for cheat_zip in cheat_zips if cheat_key in cheat_zip)
         cheat_url = f'{page_url}/{cheat_zip}'
