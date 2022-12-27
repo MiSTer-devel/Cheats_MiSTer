@@ -36,7 +36,7 @@ jobs:
         set -euo pipefail
         FILES=$(find . -type f | wc -l)
         echo "FILES: ${FILES}"
-        if (( ${FILES} < 5000 )) ; then
+        if (( ${FILES} < 10000 )) ; then
           echo "Not enough files!"
           exit 1
         fi
