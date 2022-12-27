@@ -30,6 +30,16 @@ jobs:
 
     - name: Download Cheats
       run: ./.github/download_cheats.py .
+      
+    - name: Validate Cheats
+      run: |
+        set -euo pipefail
+        FILES=$(find . -type f | wc -l)
+        echo "FILES: ${FILES}"
+        if (( ${FILES} < 5000 )) ; then
+          echo "Not enough files!"
+          exit 1
+        fi
 
     - name: Push Orphan Main
       run: |
