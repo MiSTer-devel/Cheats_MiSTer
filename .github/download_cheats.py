@@ -55,7 +55,7 @@ cheats_mapping = {
 }
 
 def install_cheats(target_dir):
-    page_url = "https://gamehacking.org/mister"
+    page_url = "https://gamehacking.org/mister?script=fetchcheats"
     cheat_zips = collect_cheat_zips(page_url)
 
     for cheat_key, cheat_platform in cheats_mapping.items():
