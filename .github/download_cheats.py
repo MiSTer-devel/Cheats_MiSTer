@@ -71,7 +71,7 @@ def install_cheats(target_dir):
         unzip(tmp_zip, cheat_folder)
 
 def collect_cheat_zips(url):
-    text = fetch_text(url, cookies={'challenge': 'BitMitigate.com'})
+    text = fetch_text(url)
     return [f[f.find('mister_'):f.find('.zip') + 4] for f in text.splitlines() if 'mister_' in f and '.zip' in f]
 
 def fetch_text(url, cookies=None):
