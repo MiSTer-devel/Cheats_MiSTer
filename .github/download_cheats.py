@@ -59,12 +59,12 @@ def install_cheats(target_dir):
     cheat_zips = collect_cheat_zips(page_url + '/?script=fetchcheats')
 
     for cheat_key, cheat_platform in cheats_mapping.items():
-        install_cheats_platform(cheat_key, cheat_platform, page_url, cheat_zips)
+        cheat_zip = next(cheat_zip for cheat_zip in cheat_zips if cheat_key in cheat_zip)
+        install_cheats_platform(cheat_key, cheat_platform, page_url, cheat_zip)
         if cheat_key == 'sms':
-            install_cheats_platform(cheat_key, 'MegaDrive', page_url, cheat_zips)
+            install_cheats_platform(cheat_key, 'MegaDrive', page_url, cheat_zip)
 
-def install_cheats_platform(cheat_key, cheat_platform, page_url, cheat_zips):
-    cheat_zip = next(cheat_zip for cheat_zip in cheat_zips if cheat_key in cheat_zip)
+def install_cheats_platform(cheat_key, cheat_platform, page_url, cheat_zip):
     cheat_url = f'{page_url}/{cheat_zip}?script=fetchcheats'
     tmp_zip = f'/tmp/{cheat_key}{cheat_platform}.zip'
     cheat_folder = f'{target_dir}/Cheats/{cheat_platform}'
