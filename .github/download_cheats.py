@@ -27,6 +27,7 @@ def main():
         except Exception as e:
             if i == 7:
                 raise e
+            print(e, flush=True)
             traceback.print_exc()
             print(f'Attempting again in 15 minutes... [{i}]', flush=True)
             time.sleep(60 * 15)
