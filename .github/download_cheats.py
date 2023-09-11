@@ -42,7 +42,7 @@ cheats_mapping = {
     "gb":"GameBoy",
     "gba":"GBA",
     "gbc":"GameBoy",
-    "gen":"Genesis",
+    "gen":"MegaDrive",
     "gg":"SMS",
     "lnx":"AtariLynx",
     "nes":"NES",
