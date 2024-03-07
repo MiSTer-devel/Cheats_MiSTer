@@ -46,7 +46,7 @@ cheats_mapping = {
     "gen":"MegaDrive",
     "gg":"SMS",
     "lnx":"AtariLynx",
-    "n64": "N64",
+    "n64":"N64",
     "nes":"NES",
     "pce":"TGFX16",
     "pcd":"TGFX16-CD",
