@@ -1,0 +1,27 @@
+name: Refresh Repository
+on:
+  schedule:
+  - cron:  "0 0 1 * *"
+  workflow_dispatch:
+
+jobs:
+  build_db:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Refresh repository by pushing orphan branch
+      run: |
+        set -euo pipefail
+        git config --global user.email theypsilon@gmail.com
+        git config --global user.name 'The CI/CD Bot'
+        git checkout --orphan refresh
+        git reset
+        date > date.txt
+        git add date.txt
+        git commit -m "-"
+        git push --force origin refresh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
