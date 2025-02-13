@@ -14,13 +14,16 @@ jobs:
     container:
       image: ubuntu:20.04
 
+    env:
+      HOME: /root
+
     steps:
+    - name: Install apt-get utilities
+      run: apt-get update && apt-get install -y --no-install-recommends git detox sharutils lsb-release ca-certificates && update-ca-certificates
+
     - uses: actions/checkout@v3
       with:
         ref: develop
-
-    - name: Install apt-get utilities
-      run: sudo apt-get install detox sharutils
 
     - uses: actions/setup-python@v4
       with:
@@ -34,6 +37,7 @@ jobs:
       run: ./.github/download_cheats.py .
       
     - name: Validate Cheats
+      shell: bash
       run: |
         set -euo pipefail
         FILES=$(find . -type f | wc -l)
@@ -44,8 +48,10 @@ jobs:
         fi
 
     - name: Push Orphan Main
+      shell: bash
       run: |
         set -euo pipefail
+        git config --global --add safe.directory '*'
         git config --global user.email "theypsilon@gmail.com"
         git config --global user.name "The CI/CD Bot"
         ./.github/push_orphan_main.sh
