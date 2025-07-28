@@ -45,6 +45,7 @@ cheats_mapping = {
     "gbc":"GameBoy",
     "gen":"MegaDrive",
     "gg":"SMS",
+    "jag": "Jaguar",
     "lnx":"AtariLynx",
     "n64":"N64",
     "nes":"NES",
