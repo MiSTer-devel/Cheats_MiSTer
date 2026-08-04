@@ -49,6 +49,7 @@ cheats_mapping = {
     "lnx":"AtariLynx",
     "n64":"N64",
     "nes":"NES",
+    "nvb": "VirtualBoy",
     "pce":"TGFX16",
     "pcd":"TGFX16-CD",
     "psx":"PSX",
